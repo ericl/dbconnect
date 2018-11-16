@@ -59,7 +59,10 @@ conda create --name dbconnect python=3.5
 To connect to a Databricks cluster, 3 things are required:
 1. **Databricks URL Endpoint** (e.g.: “https://<your org name>.cloud.databricks.com”)
 1. **Databricks User token:** After login to Databricks, from the top right user menu, you can click on “User Settings” and then go to “Access Tokens” tab to generate a new token
+![Token](https://github.com/ToddGreenstein/dbconnect/blob/master/images/token.png)
+![Token](https://github.com/ToddGreenstein/dbconnect/blob/master/images/token2.png)
 1. **Databricks Cluster ID:** You also need the cluster ID you created with the custom runtime version. You can obtain the cluster ID from the URL as shown:
+![Cluster ID](https://github.com/ToddGreenstein/dbconnect/blob/master/images/clusterID.png)
 
 **Step 3:** *Once you have the 3 piece of information, you can now pass this information to your SparkSession builder.*
 
