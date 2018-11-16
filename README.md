@@ -281,8 +281,9 @@ This should be added to the Python Configuration.   You will also need to disabl
 
 If running with a virtual environment, which is the recommended way to develop for python in VS Code.   In the Command Palette (Command+Shift+P on macOS and Ctrl+Shift+P on Windows/Linux) type "select python interpreter" and point to your environment that *matches* your cluster python version.  Example: if your cluster is python 3.5, your local environment should by python 3.5.
 
-[VS Code ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/selectintepreter.png)
-[VS Code ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/python35.png)
+![VS Code ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/selectintepreter.png)
+
+![VS Code ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/python35.png)
 
 Ensure PySpark is installed / in path by executing the following in the PYTHON folder.
 pip install -e . --user        
