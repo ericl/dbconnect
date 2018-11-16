@@ -25,7 +25,8 @@ window.prefs.set("enableCustomSparkVersions", true)
 ```html
 custom:custom-local__next-major-version-scala2.11__dev__master__6a23f76__27d3334__dbe0.5__fef2363__format-2.lz4
 ```
-1. Make sure to set the cluster’s python version to be the same as the one in local environments where users will connect their IDE's from (laptop or desktop machine etc).  This is crucial, even a minor version mismatch means the client on a local workstation where an IDE is running will have environment connectivity issues trying to connect to the cluster.  
+![Custom Version ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/customRuntime.png)
+1. Make sure to set the cluster’s python version to be the same as the one in local environments where users will connect their IDE's from (laptop or desktop machine etc).  This is crucial, even a minor version mismatch means the client on a local workstation where an IDE is running will have environment connectivity issues trying to connect to the cluster.   
 1. Add the following Spark conf:
 ```javascript
 spark.databricks.service.server.enabled true
@@ -34,8 +35,7 @@ if running in Azure you will also need to add the following Spark conf:
 ```javascript
 spark.databricks.service.port 8787
 ```
-![Custom Version ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/customRuntime.png)
-![Spark Config](https://raw.githubusercontent.com/username/projectname/branch/path/to/customRuntime2.png)
+![Spark Config](https://github.com/ToddGreenstein/dbconnect/blob/master/images/customRuntime2.png)
 
 ## Client Setup
 **Step 1:** *Download the Client*
