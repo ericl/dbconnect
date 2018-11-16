@@ -37,13 +37,21 @@ spark.databricks.service.port 8787
 ## Client Setup
 **Step 1:** *Download the Client*
 
-* The client can be downloaded from
+* The client, which is an SDK that allows you to connect to remote clusters, can be downloaded from
 
  https://drive.google.com/file/d/1O8cH1DJqd21P1fdraDpTGMogbUcqt0Rm/view?usp=sharing
-* Unpack it (unzip <filename.zip>)
-On a Windows OS, make sure that the client full path does not contain any spaces.
-* **Note**: The client requires the same .minor version of python that the server is running.  Example: a local client running in and environment using 3.6 will not run against a cluster running 3.5.
-* **Note**: The Client does not support java 11.  We test against java 8
+* Unpack it (unzip <filename.zip>) On a Windows OS, make sure that the client full path does not contain any spaces.  
+* Currently in the preview when unpacked, it acts as a standalone SDK that has no default integration into your system path, or environment variables.   This will change with the GA version.   
+* Once unpacked, if your development is python based you will need to install pyspark.   This can be done from the SDK directory from the python folder
+```bash
+pip install -e . --user  
+```
+**Note on Python Virtual Environments**: The client requires the same .minor version of python that the server is running.  Example: a local client running in and environment using 3.6 will not run against a cluster running 3.5. If you're using conda on your local development environment, and your cluster is running python 3.5, you you will need to create an environment locally with that identical version.  
+```bash
+conda create --name dbconnect python=3.5
+```
+* Confirm you have java 8 installed.   
+**Note**: The Client does not support java 11.  We test against java 8.  This will change with the GA Version.   
 
 **Step 2:** *Configure connection properties*
 
@@ -71,10 +79,10 @@ public class HelloWorld {
 			.config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")
 			.config("spark.databricks.service.token", "dapixxxx")
 			.config("spark.databricks.service.clusterId", "0611-211525-xxxxx")
-                 	.config("spark.databricks.service.orgId", "83127xxxxxxxx")
 // Only necessary on consolidated and Azure
 //.config("spark.databricks.service.port", "8787")
 // Only do this on Azure
+//.config("spark.databricks.service.orgId", "83127xxxxxxxx")
 			.getOrCreate();
 
 		System.out.println(spark.range(100).count());  
@@ -93,13 +101,13 @@ object Test {
     val spark = SparkSession.builder()
       	.master("local")
       	.config("spark.databricks.service.client.enabled", "true")
-.config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")
-	.config("spark.databricks.service.token", "dapixxxxxxxx")
-	.config("spark.databricks.service.clusterId", "0611-211525-xxxxx")
-       .config("spark.databricks.service.orgId", "83127xxxxxxxx")
+        .config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")
+	       .config("spark.databricks.service.token", "dapixxxxxxxx")
+	       .config("spark.databricks.service.clusterId", "0611-211525-xxxxx")
 // Only necessary on consolidated and Azure
-//.config("spark.databricks.service.port", "8787")
+// .config("spark.databricks.service.orgId", "83127xxxxxxxx")
 // Only do this on Azure
+// .config("spark.databricks.service.port", "8787")
       .getOrCreate()
   println(spark.range(100).count())  
   // The Spark code will execute on the Databricks cluster.
@@ -116,9 +124,10 @@ spark = SparkSession\
 .config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")\
 	.config("spark.databricks.service.token", "dapixxxxxxxx")\
 	.config("spark.databricks.service.clusterId", "0611-211525-xxxxx")\
-	.config("spark.databricks.service.orgId", "83127xxxxxxxx")\ # Only necessary on consolidated and Azure
-#.config("spark.databricks.service.port", "8787")\
+# Only necessary on consolidated and Azure
+#.config("spark.databricks.service.orgId", "83127xxxxxxxx")\
 # Only do this on Azure
+#.config("spark.databricks.service.port", "8787")\
 .getOrCreate()
 
 print("Testing simple count")
@@ -150,13 +159,13 @@ object Test {
     val spark = SparkSession.builder()
       	.master("local")
       	.config("spark.databricks.service.client.enabled", "true")
-.config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")
-	.config("spark.databricks.service.token", "dapixxxxxxxx")
-	.config("spark.databricks.service.clusterId", "0611-211525-xxxxx")
-       .config("spark.databricks.service.orgId", "83127xxxxxxxx")
+        .config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")
+	      .config("spark.databricks.service.token", "dapixxxxxxxx")
+	      .config("spark.databricks.service.clusterId", "0611-211525-xxxxx")
 // Only necessary on consolidated and Azure
-//.config("spark.databricks.service.port", "8787")
+// .config("spark.databricks.service.orgId", "83127xxxxxxxx")
 // Only do this on Azure
+//.config("spark.databricks.service.port", "8787")
       .getOrCreate();
     spark.sparkContext.setLogLevel("INFO")
 
@@ -182,15 +191,15 @@ from lib import Foo
 from pyspark.sql import SparkSession
 
 spark = SparkSession
-.builder
-.config("spark.databricks.service.client.enabled", "true")
-.config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")
-	.config("spark.databricks.service.token", "dapixxxxxxxx")
-	.config("spark.databricks.service.clusterId", "0611-211525-xxxxx")
-       .config("spark.databricks.service.orgId", "83127xxxxxxxx")\
+.builder\
+.config("spark.databricks.service.client.enabled", "true")\
+.config("spark.databricks.service.address", "https://xxx.cloud.databricks.com")\
+	.config("spark.databricks.service.token", "dapixxxxxxxx")\
+	.config("spark.databricks.service.clusterId", "0611-211525-xxxxx")\
 # Only necessary on consolidated and Azure
-#.config("spark.databricks.service.port", "8787")\
+# .config("spark.databricks.service.orgId", "83127xxxxxxxx")\
 # Only do this on Azure
+# .config("spark.databricks.service.port", "8787")\
 .getOrCreate()
 
 sc = spark.sparkContext
