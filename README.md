@@ -47,7 +47,7 @@ spark.databricks.service.port 8787
 * Once unpacked, if your development is python based you will need to install pyspark.   This can be done from the SDK directory from the python folder
 ```bash
 pip install -e . --user  
-```
+```   
 **Note on Python Virtual Environments**: The client requires the same .minor version of python that the server is running.  Example: a local client running in and environment using 3.6 will not run against a cluster running 3.5. If you're using conda on your local development environment, and your cluster is running python 3.5, you you will need to create an environment locally with that identical version.  
 ```bash
 conda create --name dbconnect python=3.5
