@@ -1,5 +1,5 @@
-# DB Connect Preview
-## Instructions for usage
+# DB Connect Preview Instructions for usage
+---
 # Introduction
 Databricks Connect allows you to connect your favorite IDE (IntelliJ, Eclipse, Pycharm, etc), notebooks (Zeppelin, Jupyter) and other custom applications to Databricks clusters and run Spark code. Typically, you write code in IDE, compile them as a jar, upload the jar to Databricks and then use a notebook or Databricks job UI/API to run the jar. This is a very cumbersome process during development. With Databricks Connect, you can now run the code directly from your favorite applications.
 
@@ -7,7 +7,7 @@ This will allow you to:
 Iterate quickly when you want to test your Spark code on a medium-large dataset during development in your IDE
 Step through and debug the code in your IDE even when working with a remote cluster.
 
-Databricks Connect requires you to install a Databricks provided client on your machine and setup a cluster with a custom Databricks runtime image. The rest of the document will walk you through the steps to get started.
+Databricks Connect requires you to install a Databricks provided client on your machine and setup a cluster with a custom Databricks runtime image. The rest of the readme will walk you through the steps to get started.   **Databricks Connect** is still in *preview* and we look forward to any feedback you have during this process.   Many of the manual steps listed below will be automated before GA.
 
 ## Server Setup
 **Step 1:** *Login and activate custom runtime versions*
@@ -58,7 +58,7 @@ conda create --name dbconnect python=3.5
 
 To connect to a Databricks cluster, 3 things are required:
 1. **Databricks URL Endpoint** (e.g.: “https://<your org name>.cloud.databricks.com”)
-1. **Databricks User token:** After login to Databricks, from the top right user menu, you can click on “User Settings” and then go to “Access Tokens” tab to generate a new token
+1. **Databricks User token:** After login to Databricks, from the top right user menu, you can click on “User Settings” and then go to “Access Tokens” tab to generate a new token.  Make sure you copy and paste this token when it's displayed on the screen, as this will be the only opportunity to capture it.  
 ![Token](https://github.com/ToddGreenstein/dbconnect/blob/master/images/token.png)
 ![Token](https://github.com/ToddGreenstein/dbconnect/blob/master/images/token2.png)
 1. **Databricks Cluster ID:** You also need the cluster ID you created with the custom runtime version. You can obtain the cluster ID from the URL as shown:
@@ -224,3 +224,65 @@ class Foo(object):
   def __init__(self, x):
     self.x = x
 ```
+## Instructions for specific IDEs/development environments
+### Pycharm
+You will need to select the interpreter and add the SDK into the path.  This is done by navigating to Pycharm > Preferences > Project Interpreter > Show All...
+![pycharm Intepreter](https://github.com/ToddGreenstein/dbconnect/blob/master/images/pycharmPath.png)
+![pycharm intepreter](https://github.com/ToddGreenstein/dbconnect/blob/master/images/pycharmPath2.png)
+Add the path of the downloaded Python folder, for eg:
+```bash
+/home/eric/Downloads/spark-2.4.0-SNAPSHOT-bin-sdk-demo/python/
+```
+Make sure that the directory you add is at the top/front of the PYTHONPATH. In particular, it must be ahead of any other installed version of Spark (otherwise you will either use one of those other Spark versions and run locally or throw a ClassDefNotFoundError).
+![pycharm intepreter](https://github.com/ToddGreenstein/dbconnect/blob/master/images/pycharmPath3.png)
+
+Install pyforj:
+![pycharm py4j](https://github.com/ToddGreenstein/dbconnect/blob/master/images/py4j.png)
+
+**For Python 3 clusters:**
+Navigate to Run > Edit Configurations
+Add PYSPARK_PYTHON=python3 as an Environment variable
+
+![pycharm Python 3](https://github.com/ToddGreenstein/dbconnect/blob/master/images/Python3Env.png)
+
+### IntelliJ (Scala or Java only)
+We need to point the dependencies to the SDK we downloaded.  
+Navigate to File -> Project Structure (On the mac, Cmd + ;) -> Modules -> Dependencies-> ‘+’ sign -> JARs or Directories
+
+![Intellij Jars](https://github.com/ToddGreenstein/dbconnect/blob/master/images/intellijJars.png)
+
+Make sure that the jars you add are at the top/front of the classpath. In particular, they must be ahead of any other installed version of Spark (otherwise you will either use one of those other Spark versions and run locally or throw a ClassDefNotFoundError).
+
+Next, check the setting of the breakout option in Intellij.  It should be set to "Thread" to avoid stopping the background network threads.  "All" is the default and will cause network timeouts.  
+
+![Intellij threads ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/intellijThread.png)
+
+# Eclipse
+We need to point to the downloaded SDK.  To do that navigate to: Project menu -> Properties -> Java Build Path -> Libraries -> Add External Jars..
+
+![Eclipse Jars ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/eclipse.png)
+
+Next, make sure that the jars you add are at the top/front of the classpath. In particular, they must be ahead of any other installed version of Spark (otherwise you will either use one of those other Spark versions and run locally or throw a ClassDefNotFoundError).
+
+![Eclipse Jars ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/eclipse2.png)
+
+### VS Code
+Verify that Python extension is installed
+https://marketplace.visualstudio.com/items?itemName=ms-python.python
+
+Select a Python interpreter from the Command Palette (Command+Shift+P on macOS and Ctrl+Shift+P on Windows/Linux)
+
+Navigate to Code > Preferences > Settings, and choose "python settings"
+
+Add the SDK’s python folder path to the User Settings JSON under python.venvPath
+This should be added to the Python Configuration.   You will also need to disable the linter for the preview.   Once in user settings, click the ... on the right side and "edit json settings".   The modified settings are as follows:
+
+![VS Code ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/vscode.png)
+
+If running with a virtual environment, which is the recommended way to develop for python in VS Code.   In the Command Palette (Command+Shift+P on macOS and Ctrl+Shift+P on Windows/Linux) type "select python interpreter" and point to your environment that *matches* your cluster python version.  Example: if your cluster is python 3.5, your local environment should by python 3.5.
+
+[VS Code ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/selectintepreter.png)
+[VS Code ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/python35.png)
+
+Ensure PySpark is installed / in path by executing the following in the PYTHON folder.
+pip install -e . --user        
