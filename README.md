@@ -51,7 +51,7 @@ pip install -e . --user
 conda create --name dbconnect python=3.5
 ```
 * Confirm you have java 8 installed.   
-**Note**: The Client does not support java 11.  We test against java 8.  This will change with the GA Version.   
+**Note**: The Client does not support Java 11.  We test against java 8.  This will change with the GA Version and will support Java 11
 
 **Step 2:** *Configure connection properties*
 
