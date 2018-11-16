@@ -20,13 +20,13 @@ window.prefs.set("enableCustomSparkVersions", true)
 ![Activate Custom Versions](https://github.com/ToddGreenstein/dbconnect/blob/master/images/serverSetup.png)
 
 **Step 2:** *Create cluster with custom runtime version*
-1. Click on “Create Cluster” and enter the custom Spark version as (copy and paste this exact string):  
+* Click on “Create Cluster” and enter the custom Spark version as (copy and paste this exact string):  
 ```html
 custom:custom-local__next-major-version-scala2.11__dev__master__6a23f76__27d3334__dbe0.5__fef2363__format-2.lz4
 ```
 ![Custom Version ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/customRuntime.png)
-1. Make sure to set the cluster’s python version to be the same as the one in local environments where users will connect their IDE's from (laptop or desktop machine etc).  This is crucial, even a minor version mismatch means the client on a local workstation where an IDE is running will have environment connectivity issues trying to connect to the cluster.   
-1. Add the following Spark conf:
+* Make sure to set the cluster’s python version to be the same as the one in local environments where users will connect their IDE's from (laptop or desktop machine etc).  This is crucial, even a minor version mismatch means the client on a local workstation where an IDE is running will have environment connectivity issues trying to connect to the cluster.   
+* Add the following Spark conf:
 ```javascript
 spark.databricks.service.server.enabled true
 ```
