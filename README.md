@@ -20,8 +20,7 @@ window.prefs.set("enableCustomSparkVersions", true)
 ![Activate Custom Versions](https://github.com/ToddGreenstein/dbconnect/blob/master/images/serverSetup.png)
 
 **Step 2:** *Create cluster with custom runtime version*
-1. Click on “Create Cluster” and enter the custom Spark version as (copy and paste this exact string):
-
+1. Click on “Create Cluster” and enter the custom Spark version as (copy and paste this exact string):  
 ```html
 custom:custom-local__next-major-version-scala2.11__dev__master__6a23f76__27d3334__dbe0.5__fef2363__format-2.lz4
 ```
