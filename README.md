@@ -16,6 +16,9 @@ Log into Databricks, and paste the following in a JS console (on Chrome on Mac, 
 ```javascript
 window.prefs.set("enableCustomSparkVersions", true)
 ```
+
+![Activate Custom Versions](https://github.com/ToddGreenstein/dbconnect/blob/master/images/serverSetup.png)
+
 **Step 2:** *Create cluster with custom runtime version*
 1. Click on “Create Cluster” and enter the custom Spark version as (copy and paste this exact string):
 
@@ -31,8 +34,8 @@ if running in Azure you will also need to add the following Spark conf:
 ```javascript
 spark.databricks.service.port 8787
 ```
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![Custom Version ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/customRuntime.png)
+![Spark Config](https://raw.githubusercontent.com/username/projectname/branch/path/to/customRuntime2.png)
 
 ## Client Setup
 **Step 1:** *Download the Client*
