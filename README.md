@@ -48,12 +48,11 @@ spark.databricks.service.port 8787
 ```bash
 pip install -e . --user  
 ```   
-**Note on Python Virtual Environments**: The client requires the same .minor version of python that the server is running.  Example: a local client running in and environment using 3.6 will not run against a cluster running 3.5. If you're using conda on your local development environment, and your cluster is running python 3.5, you you will need to create an environment locally with that identical version.  
+* *Note on Python Virtual Environments*: The client requires the same .minor version of python that the server is running.  Example: a local client running in and environment using 3.6 will not run against a cluster running 3.5. If you're using conda on your local development environment, and your cluster is running python 3.5, you will need to create an environment locally with that identical version, like the following:
 ```bash
 conda create --name dbconnect python=3.5
 ```
-* Confirm you have java 8 installed.   
-**Note**: The Client does not support Java 11.  We test against java 8.  This will change with the GA Version and will support Java 11
+* Confirm you have java 8 installed.  The Client does not support Java 11.  We test against java 8.  This will change with the GA Version and will support Java 11
 
 **Step 2:** *Configure connection properties*
 
