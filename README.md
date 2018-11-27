@@ -287,3 +287,27 @@ If running with a virtual environment, which is the recommended way to develop f
 
 Ensure PySpark is installed / in path by executing the following in the PYTHON folder.
 pip install -e . --user        
+
+# Accessing DBFS
+
+DB connect provides access to DBFS through the standard Hadoop filesystem interface. You can use this the filesystem like so:
+
+```scala
+> import org.apache.hadoop.fs._
+
+// get new DBFS connection
+> val dbfs = FileSystem.get(spark.sparkContext.hadoopConfiguration)
+dbfs: org.apache.hadoop.fs.FileSystem = com.databricks.backend.daemon.data.client.DBFS@2d036335
+
+// list files
+> dbfs.listStatus(new Path("dbfs:/"))
+res1: Array[org.apache.hadoop.fs.FileStatus] = Array(FileStatus{path=dbfs:/$; isDirectory=true; ...})
+
+// open file
+> val stream = dbfs.open("dbfs:/path/to/your_file")
+stream: org.apache.hadoop.fs.FSDataInputStream = org.apache.hadoop.fs.FSDataInputStream@7aa4ef24
+
+// get file contents as string
+> import org.apache.commons.io._
+> println(new String(IOUtils.toByteArray(stream)))
+```
