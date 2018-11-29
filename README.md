@@ -39,7 +39,8 @@ spark.databricks.service.port 8787
 ## Client Setup
 **Step 1:** *Download the Client*
 
-* **Please contact support or see the #db-connect-preview slack to get the link to the latest client.**
+* The client SDK can be downloaded from the following URL (please click "request permission" to access):
+https://drive.google.com/open?id=1_seUBGX--lQzzqb088SxZG3ctb6ECjfk
 
 * Unpack it (unzip <filename.zip>) On a Windows OS, make sure that the client full path does not contain any spaces.  
 * Currently in the preview when unpacked, it acts as a standalone SDK that has no default integration into your system path, or environment variables.   This will change with the GA version.   
