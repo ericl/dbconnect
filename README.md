@@ -22,7 +22,7 @@ window.prefs.set("enableCustomSparkVersions", true)
 **Step 2:** *Create cluster with custom runtime version*
 * Click on “Create Cluster” and enter the custom Spark version as (copy and paste this exact string):  
 ```html
-custom:custom-local__next-major-version-scala2.11__dev__master__6a23f76__27d3334__dbe0.5__fef2363__format-2.lz4
+custom:custom-local__next-major-version-scala2.11__dev__master__30c2c4f__8563796__dbe0.6__cdb0bad__format-2.lz4
 ```
 ![Custom Version ](https://github.com/ToddGreenstein/dbconnect/blob/master/images/customRuntime.png)
 * Make sure to set the cluster’s python version to be the same as the one in local environments where users will connect their IDE's from (laptop or desktop machine etc).  This is crucial, even a minor version mismatch means the client on a local workstation where an IDE is running will have environment connectivity issues trying to connect to the cluster.   
@@ -39,9 +39,8 @@ spark.databricks.service.port 8787
 ## Client Setup
 **Step 1:** *Download the Client*
 
-* The client, which is an SDK that allows you to connect to remote clusters, can be downloaded from
+* **Please contact support or see the #db-connect-preview slack to get the link to the latest client.**
 
- https://drive.google.com/file/d/1O8cH1DJqd21P1fdraDpTGMogbUcqt0Rm/view?usp=sharing
 * Unpack it (unzip <filename.zip>) On a Windows OS, make sure that the client full path does not contain any spaces.  
 * Currently in the preview when unpacked, it acts as a standalone SDK that has no default integration into your system path, or environment variables.   This will change with the GA version.   
 * Once unpacked, if your development is python based you will need to install pyspark.   This can be done from the SDK directory from the python folder
